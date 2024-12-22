@@ -1,0 +1,22 @@
+program Sample;
+	func aa (n:int) returns(int)
+		var r:int;
+		begin
+			result = 1;
+			return (result)
+		end
+	proc bb (nn,ll:int ; vv:long)
+		var m:int;
+		begin
+			m = nn-1;
+			nn = 0
+		end
+	main
+	var a, b, c : int; 
+	begin
+		a = (a+1)*3;
+		call bb (a);
+		c = aa (b)
+	end .
+	/* 여기는 싹다 무시함 */
+
