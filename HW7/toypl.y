@@ -27,21 +27,21 @@ int yylex(void);
 
 %%
 
-Program: //이상없음
+Program:
 	TPROGRAM TNAME TSEMI SubPgmList TMAIN VarDecl CompStmt TDOT {
 		rootNode = makeNode("PROGRAM", $4, $6);
 		$6->bro = $7;
 	}
 	;
 
-VarDecl: //이상없음
+VarDecl:
 	TVAR DclList TSEMI	{
 		$$ = makeNode("VARDECL", NULL, $2);
 	}
 	|	{	$$=NULL;	}
 	;
 
-DclList: //이상없음
+DclList:
 	DclList TSEMI Decl {
 		$$ = $3;
 		Node* temp = $3;
@@ -51,7 +51,7 @@ DclList: //이상없음
 	| Decl	{	$$=$1;	}
 	;
 
-Decl: //이상없음
+Decl:
 	VarList TCOLON Type {
 		$$ = makeNode("DECL", NULL, $1);
 		Node* temp = $1;
@@ -60,7 +60,7 @@ Decl: //이상없음
 	}
 	;
 
-VarList: //이상없음
+VarList:
 	VarList TCOMMA Var{
 		$$ = $1;
 		Node* temp = $1;
@@ -70,7 +70,7 @@ VarList: //이상없음
 	| Var { $$=$1; }
 	;
 
-Type: //이상없음
+Type:
 	TINT {
 		$$ = makeNode("TINT", NULL, NULL);
 	}
@@ -79,14 +79,14 @@ Type: //이상없음
 	}
 	;
 
-Var: //이상없음
+Var:
 	TNAME {
 		$$=makeNode("NAME", NULL, NULL);
 		$$->value.sv = $1;
 	}
 	;
 
-SubPgmList: //이상없음
+SubPgmList:
 	SubPgmList SubPgm {
 		if($1==NULL){
 			$$ = $2;
@@ -100,12 +100,12 @@ SubPgmList: //이상없음
 	|	{	$$=NULL;	}
 	;
 
-SubPgm: //이상없음
+SubPgm:
 	ProcDecl	{	$$=$1;	}
 	| FunDecl	{	$$=$1;	}
 	;
 	
-ProcDecl: //이상없음
+ProcDecl:
 	TPROC Var TLPAREN FormParam TRPAREN VarDecl CompStmt {
 		$$ = makeNode("PROC", NULL, $2);
 		$2->bro = $4;
@@ -116,7 +116,7 @@ ProcDecl: //이상없음
 	}
 	;
 
-FunDecl: //이상없음
+FunDecl:
 	TFUNC Var TLPAREN FormParam TRPAREN TRETURNS TLPAREN Type TRPAREN VarDecl CompStmt {
 		$$ = makeNode("FUNC", NULL, $2);
 		$2->bro = $8;
@@ -128,12 +128,12 @@ FunDecl: //이상없음
 	}
 	;
 
-FormParam: //이상없음
+FormParam:
 	DclList { $$=$1; }
 	| { $$=NULL; }
 	;
 
-Cond: //이상없음
+Cond:
 	Cond TAND Rel {
 		$$ = makeNode("AND", NULL, $1);
 		$1->bro = $3;
@@ -148,7 +148,7 @@ Cond: //이상없음
 	| Rel { $$ = $1; }
 	;
 	
-Rel: //이상없음
+Rel:
 	Expr TLESS Expr{
 		$$ = makeNode("LT", NULL, $1);
 		$1->bro = $3;
@@ -175,7 +175,7 @@ Rel: //이상없음
 	}
 	;
 
-Expr: //이상없음
+Expr:
 	Expr TPLUS Term {
 		$$=makeNode("PLUS", NULL, $1);
 		$1->bro = $3;
@@ -187,7 +187,7 @@ Expr: //이상없음
 	| Term	{	$$ = $1;	}
 	;
 
-Term: //이상없음
+Term:
 	Term TMULT Fact {
 		$$=makeNode("TIMES", NULL, $1);
 		$1->bro = $3;
@@ -199,7 +199,7 @@ Term: //이상없음
 	| Fact	{	$$ = $1;	}
 	;
 
-Fact: //이상없음
+Fact:
 	Var {	$$=$1;	}
 	| TNUMBER {
 		$$=makeNode("NUMBER", NULL, NULL);
@@ -212,19 +212,19 @@ Fact: //이상없음
 	| TLPAREN Expr TRPAREN {	$$=$2;	}
 	;
 
-FuncCall: //이상없음
+FuncCall:
 	Var TLPAREN ParamList TRPAREN {
 		$$ = makeNode("FCALL", NULL, $1);
 		$1->bro = $3;
 	}
 	;
 
-ParamList: //이상없음
+ParamList:
 	ExprList	{ $$=$1; }
 	| { $$=NULL; }
 	;
 	
-ExprList: //이상없음
+ExprList:
 	ExprList TCOMMA Expr {
 		$$ = $1;
 		Node* temp = $1;
@@ -234,7 +234,7 @@ ExprList: //이상없음
 	| Expr	{ $$=$1; }
 	;
 	
-Stmt: //Stmt부분 이상없음
+Stmt:
 	AsgnStmt	{	$$=$1;	}
 	| IfStmt	{	$$=$1;	}
 	| WhileStmt	{	$$=$1;	}
