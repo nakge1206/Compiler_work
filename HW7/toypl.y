@@ -359,7 +359,7 @@ int main() {
 	printf("\n");
 
 	//gencode 실행
-	code(rootNode);
+	//code(rootNode);
     return 0;
 }
 

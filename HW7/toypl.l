@@ -24,7 +24,7 @@ call	{ return TCALL; }
 begin	{ return TBEGIN; }
 end	{ return TEND; }
 
-[0-9]+	{ yylval.dval = atoi(yytext); return TNUMBER; }
+([1-9][0-9]*)|0	{ yylval.dval = atoi(yytext); return TNUMBER; }
 [a-zA-Z][a-zA-Z0-9_]*	{ yylval.sval = strdup(yytext); return TNAME; }
 
 "="	{ return TEQUAL; }

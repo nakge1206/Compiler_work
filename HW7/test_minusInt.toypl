@@ -1,0 +1,8 @@
+program Sample;
+	main 
+	var a : int; 
+	begin
+		a = -2
+	end .
+	/* 여기는 싹다 무시함 */
+
