@@ -1,6 +1,6 @@
 # Compiler
 
-![image](./compiler/.jpeg)
+<img src="./image/compiler.jpeg">
 
 구현부분
 -----
