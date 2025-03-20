@@ -1,0 +1,14 @@
+program Sample; 
+	proc Fact ( n : long ) 
+		var m : int ; 
+		begin 
+			m = n-1;
+			call Fact(m) 
+		end 
+	main 
+	var a, b : int; 
+	begin
+		a = 0;
+		call Fact(a)
+	end .
+	/* 여기는 싹다 무시함 */
